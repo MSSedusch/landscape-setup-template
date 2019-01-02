@@ -87,9 +87,20 @@ clusters:
     # DNS provider (currently only route53 supported by these setup scripts)
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
-    hosted_zone_id: "<hosted zone id>"
-    access_key: "<access key for hosted zone>"
-    secret_key: "<secret key for hosted zone>"
+    dns_type: route53
+    variant_azuredns:
+      tenant_id: "<az tenant id>"
+      subscription_id: "<az subscription id>"
+      client_id: "<az client id>"
+      client_secret: "<az client secret>"
+      region: &az_region westeurope
+      cloudenv: public
+      zone_name: "<az zone name>"
+      resource_group_name: "<az zone resource group name>"
+    variant_route53:
+      hosted_zone_id: "<hosted zone id>"
+      access_key: "<access key for hosted zone>"
+      secret_key: "<secret key for hosted zone>"
   master: # kubify only
     # Properties for master nodes.
     count: 3

@@ -60,12 +60,21 @@ clusters:
     # domain name for cluster created by Kubify
     domain_name: "(( merge ))"
     # DNS provider (currently only route53 supported by these setup scripts)
-    dns_type: route53
+    dns_type: "(( merge ))"
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
-    hosted_zone_id: "(( merge ))"
-    access_key: "(( merge ))"
-    secret_key: "(( merge ))"
+    variant_azuredns:
+      tenant_id: "(( merge ))"
+      subscription_id: "(( merge ))"
+      client_id: "(( merge ))"
+      client_secret: "(( merge ))"
+      cloudenv: "(( merge ))"
+      zone_name: "(( merge ))"
+      resource_group_name: "(( merge ))"
+    variant_route53:    
+      hosted_zone_id: "(( merge ))"
+      access_key: "(( merge ))"
+      secret_key: "(( merge ))"
   master:
     # Properties for master nodes.
     <<: (( merge ))
@@ -142,18 +151,36 @@ charts:
         # the cluster internal domain, this should be set to
         # "internal." + clusters.dns.domain_name
         domain: (( "internal." clusters.dns.domain_name ))
-        provider: aws-route53
-        hostedZoneID: (( clusters.dns.hosted_zone_id ))
-        access_key: (( clusters.dns.access_key ))
-        secret_key: (( clusters.dns.secret_key ))
+        provider: (( clusters.dns.provider ))
+        variant_azuredns:
+          tenant_id: (( clusters.dns.variant_azuredns.tenant_id ))
+          subscription_id: (( clusters.dns.variant_azuredns.subscription_id ))
+          client_id: (( clusters.dns.variant_azuredns.client_id ))
+          client_secret: (( clusters.dns.variant_azuredns.client_secret ))
+          cloudenv: (( clusters.dns.variant_azuredns.cloudenv ))
+          zone_name: (( clusters.dns.variant_azuredns.zone_name ))
+          resource_group_name: (( clusters.dns.variant_azuredns.resource_group_name ))
+        variant_route53:
+          hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
+          access_key: (( clusters.dns.variant_route53.access_key ))
+          secret_key: (( clusters.dns.variant_route53.secret_key ))
       defaultDomains:
         # the cluster internal domain, this should be set to
         # "shoot." + clusters.dns.domain_name
       - domain: (( "shoot." clusters.dns.domain_name ))
-        provider: aws-route53
-        hostedZoneID: (( clusters.dns.hosted_zone_id ))
-        access_key: (( clusters.dns.access_key ))
-        secret_key: (( clusters.dns.secret_key ))
+        provider: (( clusters.dns.provider ))
+        variant_azuredns:
+          tenant_id: (( clusters.dns.variant_azuredns.tenant_id ))
+          subscription_id: (( clusters.dns.variant_azuredns.subscription_id ))
+          client_id: (( clusters.dns.variant_azuredns.client_id ))
+          client_secret: (( clusters.dns.variant_azuredns.client_secret ))
+          cloudenv: (( clusters.dns.variant_azuredns.cloudenv ))
+          zone_name: (( clusters.dns.variant_azuredns.zone_name ))
+          resource_group_name: (( clusters.dns.variant_azuredns.resource_group_name ))
+        variant_route53:
+          hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
+          access_key: (( clusters.dns.variant_route53.access_key ))
+          secret_key: (( clusters.dns.variant_route53.secret_key ))
 - name: dashboard
   repository: https://github.com/gardener/dashboard
   path: charts/gardener-dashboard
