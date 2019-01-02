@@ -61,6 +61,7 @@ clusters:
     domain_name: "(( merge ))"
     # DNS provider (currently only route53 supported by these setup scripts)
     dns_type: "(( merge ))"
+    provider: "(( merge ))"
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
     variant_azuredns:
