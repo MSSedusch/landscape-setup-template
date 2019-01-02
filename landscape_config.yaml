@@ -88,6 +88,7 @@ clusters:
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
     dns_type: route53
+    provider: aws-route53
     variant_azuredns:
       tenant_id: "<az tenant id>"
       subscription_id: "<az subscription id>"
