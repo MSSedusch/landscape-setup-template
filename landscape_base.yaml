@@ -65,13 +65,13 @@ clusters:
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
     variant_azuredns:
-      tenant_id: "(( merge ))"
-      subscription_id: "(( merge ))"
-      client_id: "(( merge ))"
-      client_secret: "(( merge ))"
-      cloudenv: "(( merge ))"
-      zone_name: "(( merge ))"
-      resource_group_name: "(( merge ))"
+      az_tenant_id: "(( merge ))"
+      az_subscription_id: "(( merge ))"
+      az_client_id: "(( merge ))"
+      az_client_secret: "(( merge ))"
+      az_cloudenv: "(( merge ))"
+      az_zone_name: "(( merge ))"
+      az_resource_group_name: "(( merge ))"
     variant_route53:    
       hosted_zone_id: "(( merge ))"
       access_key: "(( merge ))"
@@ -154,13 +154,13 @@ charts:
         domain: (( "internal." clusters.dns.domain_name ))
         provider: (( clusters.dns.provider ))
         variant_azuredns:
-          tenant_id: (( clusters.dns.variant_azuredns.tenant_id ))
-          subscription_id: (( clusters.dns.variant_azuredns.subscription_id ))
-          client_id: (( clusters.dns.variant_azuredns.client_id ))
-          client_secret: (( clusters.dns.variant_azuredns.client_secret ))
-          cloudenv: (( clusters.dns.variant_azuredns.cloudenv ))
-          zone_name: (( clusters.dns.variant_azuredns.zone_name ))
-          resource_group_name: (( clusters.dns.variant_azuredns.resource_group_name ))
+          tenant_id: (( clusters.dns.variant_azuredns.az_tenant_id ))
+          subscription_id: (( clusters.dns.variant_azuredns.az_subscription_id ))
+          client_id: (( clusters.dns.variant_azuredns.az_client_id ))
+          client_secret: (( clusters.dns.variant_azuredns.az_client_secret ))
+          cloudenv: (( clusters.dns.variant_azuredns.az_cloudenv ))
+          zone_name: (( clusters.dns.variant_azuredns.az_zone_name ))
+          resource_group_name: (( clusters.dns.variant_azuredns.az_resource_group_name ))
         variant_route53:
           hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
           access_key: (( clusters.dns.variant_route53.access_key ))
@@ -171,13 +171,13 @@ charts:
       - domain: (( "shoot." clusters.dns.domain_name ))
         provider: (( clusters.dns.provider ))
         variant_azuredns:
-          tenant_id: (( clusters.dns.variant_azuredns.tenant_id ))
-          subscription_id: (( clusters.dns.variant_azuredns.subscription_id ))
-          client_id: (( clusters.dns.variant_azuredns.client_id ))
-          client_secret: (( clusters.dns.variant_azuredns.client_secret ))
-          cloudenv: (( clusters.dns.variant_azuredns.cloudenv ))
-          zone_name: (( clusters.dns.variant_azuredns.zone_name ))
-          resource_group_name: (( clusters.dns.variant_azuredns.resource_group_name ))
+          tenant_id: (( clusters.dns.variant_azuredns.az_tenant_id ))
+          subscription_id: (( clusters.dns.variant_azuredns.az_subscription_id ))
+          client_id: (( clusters.dns.variant_azuredns.az_client_id ))
+          client_secret: (( clusters.dns.variant_azuredns.az_client_secret ))
+          cloudenv: (( clusters.dns.variant_azuredns.az_cloudenv ))
+          zone_name: (( clusters.dns.variant_azuredns.az_zone_name ))
+          resource_group_name: (( clusters.dns.variant_azuredns.az_resource_group_name ))
         variant_route53:
           hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
           access_key: (( clusters.dns.variant_route53.access_key ))
