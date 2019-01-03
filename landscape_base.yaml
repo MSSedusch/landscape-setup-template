@@ -62,6 +62,7 @@ clusters:
     # DNS provider (currently only route53 supported by these setup scripts)
     dns_type: "(( merge ))"
     provider: "(( merge ))"
+    hosted_zone_id: "(( merge ))"
     # hosted zone for domain names and credentials (possibly the same ones
     # as above)
     variant_azuredns:
@@ -70,10 +71,7 @@ clusters:
       az_client_id: "(( merge ))"
       az_client_secret: "(( merge ))"
       az_cloudenv: "(( merge ))"
-      az_zone_name: "(( merge ))"
-      az_resource_group_name: "(( merge ))"
-    variant_route53:    
-      hosted_zone_id: "(( merge ))"
+    variant_route53:
       access_key: "(( merge ))"
       secret_key: "(( merge ))"
   master:
@@ -153,16 +151,14 @@ charts:
         # "internal." + clusters.dns.domain_name
         domain: (( "internal." clusters.dns.domain_name ))
         provider: (( clusters.dns.provider ))
+        hostedZoneID: (( clusters.dns.hosted_zone_id ))
         variant_azuredns:
           tenant_id: (( clusters.dns.variant_azuredns.az_tenant_id ))
           subscription_id: (( clusters.dns.variant_azuredns.az_subscription_id ))
           client_id: (( clusters.dns.variant_azuredns.az_client_id ))
           client_secret: (( clusters.dns.variant_azuredns.az_client_secret ))
           cloudenv: (( clusters.dns.variant_azuredns.az_cloudenv ))
-          zone_name: (( clusters.dns.variant_azuredns.az_zone_name ))
-          resource_group_name: (( clusters.dns.variant_azuredns.az_resource_group_name ))
         variant_route53:
-          hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
           access_key: (( clusters.dns.variant_route53.access_key ))
           secret_key: (( clusters.dns.variant_route53.secret_key ))
       defaultDomains:
@@ -170,16 +166,14 @@ charts:
         # "shoot." + clusters.dns.domain_name
       - domain: (( "shoot." clusters.dns.domain_name ))
         provider: (( clusters.dns.provider ))
+        hostedZoneID: (( clusters.dns.hosted_zone_id ))
         variant_azuredns:
           tenant_id: (( clusters.dns.variant_azuredns.az_tenant_id ))
           subscription_id: (( clusters.dns.variant_azuredns.az_subscription_id ))
           client_id: (( clusters.dns.variant_azuredns.az_client_id ))
           client_secret: (( clusters.dns.variant_azuredns.az_client_secret ))
           cloudenv: (( clusters.dns.variant_azuredns.az_cloudenv ))
-          zone_name: (( clusters.dns.variant_azuredns.az_zone_name ))
-          resource_group_name: (( clusters.dns.variant_azuredns.az_resource_group_name ))
         variant_route53:
-          hostedZoneID: (( clusters.dns.variant_route53.hosted_zone_id ))
           access_key: (( clusters.dns.variant_route53.access_key ))
           secret_key: (( clusters.dns.variant_route53.secret_key ))
 - name: dashboard
